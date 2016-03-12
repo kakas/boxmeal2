@@ -34,6 +34,7 @@ gem 'awesome_rails_console'
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'simple_form'
+gem 'cocoon'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

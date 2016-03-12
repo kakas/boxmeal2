@@ -61,6 +61,7 @@ GEM
     byebug (8.2.2)
     callsite (0.0.11)
     choice (0.2.0)
+    cocoon (1.2.6)
     coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -208,6 +209,7 @@ DEPENDENCIES
   bootstrap-sass
   bullet
   byebug
+  cocoon
   coffee-rails (~> 4.1.0)
   devise
   jbuilder (~> 2.0)
