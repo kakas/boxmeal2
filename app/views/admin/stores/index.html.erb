@@ -1,0 +1,25 @@
+<h2>店家列表</h2>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>店名</th>
+      <th>電話</th>
+      <th>住址</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stores.each do |store| %>
+      <tr>
+        <td><%= store.name %></td>
+        <td><%= store.phone %></td>
+        <td><%= store.address %></td>
+        <td>
+          <%= link_to "Edit Store", edit_admin_store_path(store), class: "btn btn-default btn-xs" %>
+          <%= link_to "Delete Store", admin_store_path(store), method: :delete, class: "btn btn-default btn-xs", data: { confirm: "確定刪除#{store.name}" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

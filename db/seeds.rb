@@ -1,7 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+store_name = "臣 亮 言 先 帝 創 業 未 半 而 中 道 崩 殂 今 天 下 三 分 益 州 疲 弊 此 誠 危 急 存 亡 之 秋 也".split
+meal = "排骨 機腿 雞肉 牛肉 羊肉 豬肉".split
+meal_2 = "飯 麵 粥 排".split
+
+(1..10).to_a.each do |n|
+  s = Store.new
+  s.name = store_name.sample + store_name.sample + meal.sample + meal_2.sample
+  s.phone = "0"
+  s.address = store_name.sample + store_name.sample + "路157號"
+  s.save
+end
