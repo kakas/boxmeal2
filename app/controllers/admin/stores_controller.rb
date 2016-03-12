@@ -1,5 +1,7 @@
 class Admin::StoresController < ApplicationController
 
+  before_action :find_store, only: [:edit, :update, :destroy]
+
   def index
     @stores = Store.all
   end
@@ -18,10 +20,25 @@ class Admin::StoresController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @store.update(store_params)
+      redirect_to admin_stores_path
+    else
+      render :edit
+    end
+  end
+
   private
 
   def store_params
     params.require(:store).permit(:name, :phone, :address)
+  end
+
+  def find_store
+    @store = Store.find(params[:id])
   end
 
 end
