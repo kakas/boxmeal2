@@ -31,6 +31,11 @@ class Admin::StoresController < ApplicationController
     end
   end
 
+  def destroy
+    @store.destroy
+    redirect_to admin_stores_path
+  end
+
   private
 
   def store_params
