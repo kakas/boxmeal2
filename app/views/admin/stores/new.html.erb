@@ -1,0 +1,8 @@
+<h2>新增商店</h2>
+
+<%= simple_form_for [:admin, @store] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :phone %>
+  <%= f.input :address %>
+  <%= f.submit "Submit", data: { disable_with: "Submitting..." } %>
+<% end %>
