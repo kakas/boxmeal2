@@ -32,6 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'awesome_rails_console'
 gem 'devise'
+gem 'omniauth-facebook'
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'cocoon'
