@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  root "stores#index"
+  root "groupons#index"
 
   # 管理者
   namespace :admin do
@@ -11,10 +11,10 @@ Rails.application.routes.draw do
 
   # 一般使用者
   resources :stores do
-    resources :groupons, only: [:index, :new, :create]
+    resources :groupons, only: [:new, :create]
   end
 
-  resources :groupons, only: [:show, :edit, :update, :destroy] do
+  resources :groupons, only: [:index, :show, :edit, :update, :destroy] do
     resources :products, controller: 'groupon/products' do
       post :add_to_order, on: :member
     end

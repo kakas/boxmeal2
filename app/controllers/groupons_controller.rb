@@ -4,6 +4,10 @@ class GrouponsController < ApplicationController
 
   before_action :find_store, only: [:new, :create, :show]
 
+  def index
+    @groupons = Groupon.where("is_secret = ?", false)
+  end
+
   def new
     @groupon = Groupon.new
   end
@@ -16,6 +20,20 @@ class GrouponsController < ApplicationController
       redirect_to groupon_products_path(@groupon.token)
     else
       render :new
+    end
+  end
+
+  def edit
+    @groupon = Groupon.find_by_token(params[:id])
+  end
+
+  def update
+    @groupon = Groupon.find_by_token(params[:id])
+
+    if @groupon.update(groupon_params)
+      redirect_to groupon_products_path(@groupon.token)
+    else
+      render :edit
     end
   end
 
