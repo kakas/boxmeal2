@@ -1,7 +1,7 @@
 class Groupon::ProductsController < ApplicationController
 
   def index
-    @groupon = Groupon.find_by_token(params[:groupon_id])
+    @groupon = Groupon.includes(store: :products).find_by_token(params[:groupon_id])
   end
 
   def add_to_order

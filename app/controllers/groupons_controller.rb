@@ -5,7 +5,7 @@ class GrouponsController < ApplicationController
   before_action :find_store, only: [:new, :create, :show]
 
   def index
-    @groupons = Groupon.where("is_secret = ?", false)
+    @groupons = Groupon.includes(:store).where("is_secret = ?", false)
   end
 
   def new
