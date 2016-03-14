@@ -1,0 +1,2 @@
+module Groupon::ProductsHelper
+end
