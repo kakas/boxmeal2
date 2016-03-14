@@ -3,7 +3,6 @@ class GrouponsController < ApplicationController
   before_action :authenticate_user!
 
   before_action :find_store, only: [:new, :create, :show]
-  before_action :find_groupon, only: [:show]
 
   def new
     @groupon = Groupon.new
@@ -14,13 +13,10 @@ class GrouponsController < ApplicationController
 
     if @groupon.save
       @groupon.hosts << current_user
-      redirect_to store_groupon_products_path(@store, @groupon.token)
+      redirect_to groupon_products_path(@groupon.token)
     else
       render :new
     end
-  end
-
-  def show
   end
 
   private
@@ -33,7 +29,4 @@ class GrouponsController < ApplicationController
     @store = Store.find_by(id: params[:store_id])
   end
 
-  def find_groupon
-    @groupon = Groupon.find_by_token(params[:id])
-  end
 end
