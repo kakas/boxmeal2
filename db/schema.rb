@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314023943) do
+ActiveRecord::Schema.define(version: 20160314050251) do
+
+  create_table "groupons", force: :cascade do |t|
+    t.datetime "deadline"
+    t.boolean  "is_secret"
+    t.string   "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "products", force: :cascade do |t|
     t.integer  "store_id"
