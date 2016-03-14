@@ -2,7 +2,7 @@ class Order < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :groupon
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
   has_many :items, through: :order_items, source: :product
 
   before_create :generate_token

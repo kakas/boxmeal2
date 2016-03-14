@@ -11,11 +11,12 @@ Rails.application.routes.draw do
 
   # 一般使用者
   resources :stores do
-    # groupon
-    resources :groupons do
-      resources :products, controller: 'groupon/products' do
-        post :add_to_order, on: :member
-      end
+    resources :groupons, only: [:index, :new, :create]
+  end
+
+  resources :groupons, only: [:show, :edit, :update, :destroy] do
+    resources :products, controller: 'groupon/products' do
+      post :add_to_order, on: :member
     end
   end
 

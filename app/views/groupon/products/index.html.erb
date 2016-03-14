@@ -1,7 +1,7 @@
-<h2>現在開始訂購 <%= @store.name %> </h2>
+<h2>現在開始訂購 <%= @groupon.store.name %> </h2>
 <h4> 截止時間為...
   <% if @groupon.hosts.include?(current_user) %>
-    <%= link_to "修改", edit_store_groupon_path(@store, @groupon.token), class: "btn btn-warning btn-xs" %>
+    <%= link_to "修改", edit_groupon_path(@groupon.token), class: "btn btn-warning btn-xs" %>
   <% end %>
   <%= time_format(@groupon.deadline) %>
 </h4>
@@ -17,11 +17,11 @@
     </tr>
   </thead>
   <tbody>
-    <% @store.products.each do |product| %>
+    <% @groupon.store.products.each do |product| %>
       <tr>
         <td><%= product.title %></td>
         <td><%= product.price %></td>
-        <td><%= link_to "訂購", add_to_order_store_groupon_product_path(@store, @groupon.token, product), method: :post, class: "btn btn-info" %></td>
+        <td><%= link_to "訂購", add_to_order_groupon_product_path(@groupon.token, product), method: :post, class: "btn btn-info" %></td>
       </tr>
     <% end %>
   </tbody>
