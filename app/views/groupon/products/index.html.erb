@@ -21,7 +21,7 @@
       <tr>
         <td><%= product.title %></td>
         <td><%= product.price %></td>
-        <td>購買按鈕</td>
+        <td><%= link_to "訂購", add_to_order_store_groupon_product_path(@store, @groupon.token, product), method: :post, class: "btn btn-info" %></td>
       </tr>
     <% end %>
   </tbody>

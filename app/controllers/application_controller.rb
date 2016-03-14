@@ -5,6 +5,15 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
+  def my_order(groupon, user)
+    order = groupon.orders.find_by_user_id(user.id)
+    if order.blank?
+      order = groupon.orders.build(user_id: user.id)
+      order.save
+    end
+    order
+  end
+
   protected
 
   def configure_permitted_parameters

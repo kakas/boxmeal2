@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   resources :stores do
     # groupon
     resources :groupons do
-      resources :products, controller: 'groupon/products'
+      resources :products, controller: 'groupon/products' do
+        post :add_to_order, on: :member
+      end
     end
   end
 
