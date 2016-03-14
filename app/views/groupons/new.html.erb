@@ -1,0 +1,7 @@
+<h2>新增團購</h2>
+
+<%= simple_form_for @groupon do |f| %>
+  <%= f.input :deadline %>
+  <%= f.input :is_secret, label: "不公開", as: :boolean %>
+  <%= f.submit "建立團購", data: { disable_with: "建立中..." } %>
+<% end %>

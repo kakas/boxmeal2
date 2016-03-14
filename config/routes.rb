@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   # 一般使用者
   resources :stores
 
+  # groupon
+  resources :groupons
+
 end

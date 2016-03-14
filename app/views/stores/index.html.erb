@@ -7,19 +7,19 @@
       <th class="col-md-3">店名</th>
       <th class="col-md-2">電話</th>
       <th class="col-md-6">住址</th>
-      
+
     </tr>
   </thead>
   <tbody>
     <% @stores.each do |store| %>
       <tr>
-        <td>  
-          <%= link_to "開團", root_path, method: :delete, class: "btn btn-warning btn-sm", data: { confirm: "您選擇了 #{store.name} 進行開團" } %>
+        <td>
+          <%= link_to "開團", new_groupon_path, class: "btn btn-warning btn-sm", data: { confirm: "您選擇了 #{store.name} 進行開團" } %>
         </td>
         <td><%= link_to(store.name, admin_store_path(store)) %></td>
         <td><%= store.phone %></td>
         <td><%= store.address %></td>
-        
+
       </tr>
     <% end %>
   </tbody>
