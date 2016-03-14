@@ -23,6 +23,20 @@ class GrouponsController < ApplicationController
     end
   end
 
+  def edit
+    @groupon = Groupon.find_by_token(params[:id])
+  end
+
+  def update
+    @groupon = Groupon.find_by_token(params[:id])
+
+    if @groupon.update(groupon_params)
+      redirect_to groupon_products_path(@groupon.token)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def groupon_params
