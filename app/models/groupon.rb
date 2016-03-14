@@ -12,5 +12,12 @@ class Groupon < ActiveRecord::Base
     self.token = SecureRandom.uuid
   end
 
+  def times_up?
+    Time.zone.now > self.deadline
+  end
+
+  def countdown
+    ((self.deadline - Time.zone.now)/60).round
+  end
 
 end

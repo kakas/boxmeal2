@@ -4,6 +4,10 @@ class GrouponsController < ApplicationController
 
   before_action :find_store, only: [:new, :create, :show]
 
+  def index
+    @groupons = Groupon.all
+  end
+
   def new
     @groupon = Groupon.new
   end
