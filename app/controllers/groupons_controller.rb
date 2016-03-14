@@ -2,7 +2,8 @@ class GrouponsController < ApplicationController
 
   before_action :authenticate_user!
 
-  before_action :find_store, only: [:new, :create]
+  before_action :find_store, only: [:new, :create, :show]
+  before_action :find_groupon, only: [:show]
 
   def new
     @groupon = Groupon.new
@@ -17,6 +18,10 @@ class GrouponsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    @groupon = Groupon.find_by_token(params[:id])
   end
 
   private

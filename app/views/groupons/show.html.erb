@@ -1,0 +1,28 @@
+<h2>現在開始訂購 <%= @store.name %> </h2>
+<h4> 截止時間為...
+  <% if @groupon.hosts.include?(current_user) %>
+    <%= link_to "修改", edit_store_groupon_path(@store, @groupon.token), class: "btn btn-warning btn-xs" %>
+  <% end %>
+  <%= time_format(@groupon.deadline) %>
+</h4>
+
+<hr>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <td>名稱</td>
+      <td>單價</td>
+      <td>購買</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @store.products.each do |product| %>
+      <tr>
+        <td><%= product.title %></td>
+        <td><%= product.price %></td>
+        <td>購買按鈕</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
