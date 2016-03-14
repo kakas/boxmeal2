@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  root "admin/stores#index"
+  devise_for :users
+
+  root "stores#index"
 
   # 管理者
   namespace :admin do
