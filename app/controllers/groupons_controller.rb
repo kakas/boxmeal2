@@ -21,7 +21,6 @@ class GrouponsController < ApplicationController
   end
 
   def show
-    @groupon = Groupon.find_by_token(params[:id])
   end
 
   private
@@ -32,5 +31,9 @@ class GrouponsController < ApplicationController
 
   def find_store
     @store = Store.find_by(id: params[:store_id])
+  end
+
+  def find_groupon
+    @groupon = Groupon.find_by_token(params[:id])
   end
 end
