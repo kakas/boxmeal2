@@ -11,12 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314050251) do
+ActiveRecord::Schema.define(version: 20160314051620) do
+
+  create_table "groupon_hosts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "groupon_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "groupons", force: :cascade do |t|
     t.datetime "deadline"
     t.boolean  "is_secret"
     t.string   "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hosts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "groupon_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
