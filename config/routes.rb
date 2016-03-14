@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   # 一般使用者
   resources :stores do
     # groupon
-    resources :groupons
+    resources :groupons do
+      resources :products, controller: 'groupon/products'
+    end
   end
 
 

@@ -14,7 +14,7 @@ class GrouponsController < ApplicationController
 
     if @groupon.save
       @groupon.hosts << current_user
-      redirect_to store_groupon_path(@store, @groupon.token)
+      redirect_to store_groupon_products_path(@store, @groupon.token)
     else
       render :new
     end
