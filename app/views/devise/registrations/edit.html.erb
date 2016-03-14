@@ -5,6 +5,8 @@
 
   <div class="form-inputs">
     <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :name, required: true %>
+    <%= f.input :team, required: true, collection: ["三相UPS組", "單相UPS組", "軟體組", "PV組", "PQD組", "機構組", "其他"] %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
