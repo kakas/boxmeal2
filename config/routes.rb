@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   end
 
   # 一般使用者
-  resources :stores
+  resources :stores do
+    # groupon
+    resources :groupons
+  end
 
-  # groupon
-  resources :groupons
 
 end

@@ -14,7 +14,7 @@
     <% @stores.each do |store| %>
       <tr>
         <td>
-          <%= link_to "開團", new_groupon_path, class: "btn btn-warning btn-sm", data: { confirm: "您選擇了 #{store.name} 進行開團" } %>
+          <%= link_to "開團", new_store_groupon_path(store), class: "btn btn-warning btn-sm", data: { confirm: "您選擇了 #{store.name} 進行開團" } %>
         </td>
         <td><%= link_to(store.name, admin_store_path(store)) %></td>
         <td><%= store.phone %></td>
