@@ -14,14 +14,13 @@ class GrouponsController < ApplicationController
 
     if @groupon.save
       @groupon.hosts << current_user
-      redirect_to store_groupon_path(@store, @groupon.token)
+      redirect_to store_groupon_products_path(@store, @groupon.token)
     else
       render :new
     end
   end
 
   def show
-    @groupon = Groupon.find_by_token(params[:id])
   end
 
   private
@@ -32,5 +31,9 @@ class GrouponsController < ApplicationController
 
   def find_store
     @store = Store.find_by(id: params[:store_id])
+  end
+
+  def find_groupon
+    @groupon = Groupon.find_by_token(params[:id])
   end
 end

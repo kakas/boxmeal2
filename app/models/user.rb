@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :groupon_hosts
   has_many :groupons, through: :groupon_hosts
+  has_many :orders
 
   validates :email, presence: true
   validates :name, presence: true
