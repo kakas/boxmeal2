@@ -6,6 +6,15 @@
   <%= time_format(@groupon.deadline) %>
 </h4>
 
+<% if @my_order.present? %>
+  <h3>
+    <%= link_to order_path(@my_order.token) do %>
+      我的訂單
+      <i class="fa fa-arrow-circle-left"></i>
+    <% end %>
+  </h3>
+<% end %>
+
 <hr>
 
 <table class="table table-hover">
