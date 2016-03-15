@@ -1,0 +1,89 @@
+
+<h2>現在開始訂購 <%= @groupon.store.name %> </h2>
+<h4> 截止時間為...
+  <% if @groupon.hosts.include?(current_user) %>
+    <%= link_to "修改", edit_groupon_path(@groupon.token), class: "btn btn-warning btn-xs" %>
+  <% end %>
+  <%= time_format(@groupon.deadline) %>
+</h4>
+
+<h4> <%= link_to "回到訂購列表", groupon_products_path(@groupon.token) %> </h4>
+
+<%= link_to "取消團購 X", groupon_path(@groupon.token), method: :delete, class: "btn btn-default btn-xs pull-right", data: { confirm: "確定取消團購？" } %>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">訂購列表</div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>團員</th>
+        <th>購買項目</th>
+        <th>價格</th>
+        <th>是否付款</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @grouped_orders.each do |team, team_orders| %>
+        <% nobody_pay = true %>
+        <tr class="info">
+          <td colspan="4">
+            <%= team %>
+          </td>
+        </tr>
+
+        <% team_orders.each do |order| %>
+          <tr>
+            <td><%= order.user.name %></td>
+            <td>
+              <% order.order_items.each do |order_item| %>
+                <%= order_item.product.title %>
+                ( <%= order_item.quantity %> )
+                <br>
+              <% end %>
+            </td>
+            <td><%= order.price %></td>
+            <td>
+              <% if order.is_paid? %>
+                <%= link_to "退款", return_money_groupon_order_path(@groupon.token, order.token), method: :post, class: "btn btn-warning btn-xs" %>
+                <% nobody_pay = false %>
+              <% else %>
+                <%= link_to "設定為已付款", pay_money_groupon_order_path(@groupon.token, order.token), method: :post, class: "btn btn-info btn-xs" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td colspan="2">
+          </td>
+          <td>
+            <%= team %>
+            總價為： <%= team_orders.inject(0) { |sum, order| sum + order.price } %>
+        </td>
+        <td>
+          <% if nobody_pay %>
+            <%= link_to "整組付款 <<", pay_money_by_team_groupon_orders_path(@groupon.token, team: team), method: :post, class: "btn btn-primary btn-xs" %>
+          <% end %>
+        </td>
+        </tr>
+      <% end %>
+      <tr class="danger">
+        <td colspan="4">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div class="panel-body">
+    <% @order_items_and_price.each do |product_title, quantity| %>
+      <%= product_title %> ( <%= quantity %> )
+      <br>
+    <% end %>
+    <h4> Total： <%= @groupon.total_price %> 元 </h4>
+    <h4> 電話： <%= @groupon.store.phone %></h4>
+  </div>
+
+</div>

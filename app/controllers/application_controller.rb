@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     if order.blank?
       order = groupon.orders.build(user_id: user.id)
       order.save
+      order.update_price
     end
     order
   end
