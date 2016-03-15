@@ -38,6 +38,19 @@ class GrouponsController < ApplicationController
     end
   end
 
+  def destroy
+    @groupon = Groupon.find_by_token(params[:id])
+
+    if @groupon.orders.find_by_is_paid(true).blank?
+      @groupon.destroy
+      flash[:success] = "成功取消團購"
+      redirect_to groupons_path
+    else
+      flash[:warning] = "請退款給所有人再取消"
+      redirect_to overview_groupon_path(@groupon.token)
+    end
+  end
+
   def overview
     # about the groupon
     @groupon = Groupon.find_by_token(params[:id])
