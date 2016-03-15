@@ -7,6 +7,8 @@
   <%= time_format(@groupon.deadline) %>
 </h4>
 
+<h4> <%= link_to "回到訂購列表", groupon_products_path(@groupon.token) %> </h4>
+
 <%= link_to "取消團購 X", groupon_path(@groupon.token), method: :delete, class: "btn btn-default btn-xs pull-right", data: { confirm: "確定取消團購？" } %>
 
 
