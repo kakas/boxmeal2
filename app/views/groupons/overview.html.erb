@@ -47,12 +47,11 @@
             <td><%= order.price %></td>
             <td>
               <% if order.is_paid? %>
-                付款、退款按鈕
-                <%# <%= link_to "退款", return_money_order_path(order.token), method: :post, class: "btn btn-warning btn-xs" %> %>
-                <%# <% nobody_pay = false %> %>
-                <%# <% else %> %>
-                  <%# <%= link_to "設定為已付款", pay_money_order_path(order.token), method: :post, class: "btn btn-info btn-xs" %> %>
-                <% end %>
+                <%= link_to "退款", return_money_groupon_order_path(@groupon.token, order.token), method: :post, class: "btn btn-warning btn-xs" %>
+                <% nobody_pay = false %>
+              <% else %>
+                <%= link_to "設定為已付款", pay_money_groupon_order_path(@groupon.token, order.token), method: :post, class: "btn btn-info btn-xs" %>
+              <% end %>
             </td>
           </tr>
         <% end %>
@@ -65,8 +64,7 @@
         </td>
         <td>
           <% if nobody_pay %>
-            整組付款按鈕
-            <%# <%= link_to "整組付款 <<", pay_money_by_group_orders_path(team: team, groupon_token: @groupon.token), method: :post, class: "btn btn-primary btn-xs" %> %>
+            <%= link_to "整組付款 <<", pay_money_by_team_groupon_orders_path(@groupon.token, team: team), method: :post, class: "btn btn-primary btn-xs" %>
           <% end %>
         </td>
         </tr>

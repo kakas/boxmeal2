@@ -20,6 +20,17 @@ Rails.application.routes.draw do
     resources :products, controller: 'groupon/products' do
       post :add_to_order, on: :member
     end
+
+    resources :orders do
+      member do
+        post :pay_money
+        post :return_money
+      end
+
+      collection do
+        post :pay_money_by_team
+      end
+    end
   end
 
   resources :orders do

@@ -24,4 +24,13 @@ class Order < ActiveRecord::Base
     update_price
   end
 
+  def pay!
+    self.update_columns(is_paid: true)
+  end
+
+  def return_money!
+    self.update_columns(is_paid: false)
+  end
+
+
 end
