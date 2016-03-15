@@ -75,7 +75,7 @@ class GrouponsController < ApplicationController
   def groupon_host_required
     @groupon = Groupon.find_by_token(params[:id])
 
-    if @groupon.hosts.include?(current_user)
+    if !@groupon.hosts.include?(current_user)
       flash[:warning] = "迷路了嗎？需要幫你叫警察嗎？"
       redirect_to groupons_path
     end

@@ -1,4 +1,15 @@
+
+<h2>現在開始訂購 <%= @groupon.store.name %> </h2>
+<h4> 截止時間為...
+  <% if @groupon.hosts.include?(current_user) %>
+    <%= link_to "修改", edit_groupon_path(@groupon.token), class: "btn btn-warning btn-xs" %>
+  <% end %>
+  <%= time_format(@groupon.deadline) %>
+</h4>
+
 <%= link_to "取消團購 X", groupon_path(@groupon.token), method: :delete, class: "btn btn-default btn-xs pull-right", data: { confirm: "確定取消團購？" } %>
+
+
 <div class="panel panel-primary">
   <div class="panel-heading">訂購列表</div>
 
