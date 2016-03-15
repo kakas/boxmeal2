@@ -11,4 +11,13 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :name, presence: true
   validates :team, presence: true
+
+  def to_admin!
+    self.update_columns(is_admin: true)
+  end
+
+  def to_normal!
+    self.update_columns(is_admin: false)
+  end
+
 end
