@@ -15,6 +15,17 @@ class OrderItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @order = Order.find(params[:order_id])
+    @order_item = @order.order_items.find(params[:id])
+    @product = @order_item.product
+    @order_item.destroy
+    @order.update_price
+
+    flash[:success] = "成功刪除#{@product.title}"
+    redirect_to :back
+  end
+
   private
 
   def order_item_params
