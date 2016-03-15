@@ -1,0 +1,38 @@
+<h2>訂單頁面</h2>
+
+<h3>
+  <%= link_to groupon_products_path(@order.groupon.token) do %>
+    還有點餓？
+    <i class="fa fa-arrow-circle-left"></i>
+  <% end %>
+</h3>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>品名</th>
+      <th>單價</th>
+      <th>數量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_items.each do |order_items| %>
+      <tr>
+        <td><%= order_items.product.title %></td>
+        <td><%= order_items.product.price %></td>
+        <td><%= order_items.quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>總價: <%= @order.price %></h3>
+
+<div class="pull-right">
+  <% if @order.is_paid? %>
+    <h3> <span class="class label label-info"> 已付款 </span> </h3>
+  <% else %>
+    <h3> <span class="class label label-danger"> 訂單已成立， </span> </h3>
+    <h3> <span class="class label label-danger"> 確認無誤就可以去付錢了。 </span> </h3>
+  <% end %>
+</div>
