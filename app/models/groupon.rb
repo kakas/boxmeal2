@@ -27,4 +27,14 @@ class Groupon < ActiveRecord::Base
   def total_price
     orders.inject(0) { |sum, order| sum + order.price }
   end
+
+  def group_order_items_by_title
+    group_order_items = order_items.group_by { |order_item| order_item.product.title }
+
+    # calculate the order_items total price, and put in each other
+    group_order_items.each do |product_title, order_item|
+      group_order_items[product_title] = order_item.inject(0) { |sum, order_item| sum + order_item.quantity }
+    end
+
+  end
 end

@@ -19,8 +19,9 @@ class Order < ActiveRecord::Base
     self.update_columns(price: calculate_price)
   end
 
-  def add_product_to_order(product)
+  def add_product_to_order(groupon, product)
     items << product
+    order_items.last.update_columns(groupon_id: groupon)
     update_price
   end
 

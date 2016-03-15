@@ -48,18 +48,7 @@ class GrouponsController < ApplicationController
     @grouped_orders = @groupon.group_order_by_user_team
 
     # groups all of order_items by product.title
-    @order_items = @orders.map do |order|
-      order.order_items.map do |order_item|
-        order_item
-      end
-    end
-    @order_items.flatten!
-    @order_items = @order_items.group_by { |order_item| order_item.product.title }
-
-    # calculate the order_items total price, and put in each other
-    @order_items.each do |product_title, order_item|
-      @order_items[product_title] = order_item.inject(0) { |sum, order_item| sum + order_item.quantity }
-    end
+    @order_items_and_price = @groupon.group_order_items_by_title
   end
 
   private

@@ -13,7 +13,7 @@ class Groupon::ProductsController < ApplicationController
     if @my_order.items.include?(@product)
       flash[:warning] = "#{@product.title} 已經下訂過囉～請直接修改數量即可。"
     else
-      @my_order.add_product_to_order(@product)
+      @my_order.add_product_to_order(@groupon, @product)
       flash[:success] = "訂購 #{@product.title} 成功。"
     end
 
