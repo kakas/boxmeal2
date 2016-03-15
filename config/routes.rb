@@ -20,5 +20,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :orders do
+    resources :order_items
+  end
+
 
 end
