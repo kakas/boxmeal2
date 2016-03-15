@@ -1,6 +1,4 @@
-class Admin::UsersController < ApplicationController
-
-  before_action :authenticate_user!
+class Admin::UsersController < Admin::AdminController
 
   def index
     @group_user_by_team = User.all.group_by { |user| user.team }

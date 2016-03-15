@@ -15,6 +15,12 @@ class ApplicationController < ActionController::Base
     order
   end
 
+  def admin_required
+    if !current_user.is_admin?
+      redirect_to root_path
+    end
+  end
+
   protected
 
   def configure_permitted_parameters

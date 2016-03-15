@@ -1,6 +1,5 @@
-class Admin::StoresController < ApplicationController
+class Admin::StoresController < Admin::AdminController
 
-  before_action :authenticate_user!
   before_action :find_store, only: [:edit, :show, :update, :destroy]
 
   def index

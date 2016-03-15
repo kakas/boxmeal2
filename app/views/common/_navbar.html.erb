@@ -30,8 +30,10 @@
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "管理店家/產品", admin_stores_path %></li>
-              <li><%= link_to "管理使用者權限", admin_users_path %></li>
+              <% if current_user.is_admin? %>
+                <li><%= link_to "管理店家/產品", admin_stores_path %></li>
+                <li><%= link_to "管理使用者權限", admin_users_path %></li>
+              <% end %>
               <li><%= link_to "管理帳號", edit_user_registration_path(current_user) %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "登出", destroy_user_session_path, method: :delete %></li>
