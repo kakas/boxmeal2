@@ -21,7 +21,7 @@ class Groupon < ActiveRecord::Base
   end
 
   def group_order_by_user_team
-    orders.group_by { |order| order.user.team }
+    orders.includes(:user, :order_items).group_by { |order| order.user.team }
   end
 
   def total_price
@@ -29,7 +29,7 @@ class Groupon < ActiveRecord::Base
   end
 
   def group_order_items_by_title
-    group_order_items = order_items.group_by { |order_item| order_item.product.title }
+    group_order_items = order_items.includes(:product).group_by { |order_item| order_item.product.title }
 
     # calculate the order_items total price, and put in each other
     group_order_items.each do |product_title, order_item|
