@@ -20,4 +20,11 @@ class Groupon < ActiveRecord::Base
     ((self.deadline - Time.zone.now)/60).round
   end
 
+  def group_order_by_user_team
+    orders.group_by { |order| order.user.team }
+  end
+
+  def total_price
+    orders.inject(0) { |sum, order| sum + order.price }
+  end
 end

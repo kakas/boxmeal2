@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   end
 
   resources :groupons, only: [:index, :show, :edit, :update, :destroy] do
+    get :overview, on: :member
+
     resources :products, controller: 'groupon/products' do
       post :add_to_order, on: :member
     end

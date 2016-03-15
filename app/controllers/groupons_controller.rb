@@ -1,6 +1,7 @@
 class GrouponsController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :groupon_host_required, only: [:overview]
 
   before_action :find_store, only: [:new, :create, :show]
 
@@ -37,6 +38,30 @@ class GrouponsController < ApplicationController
     end
   end
 
+  def overview
+    # about the groupon
+    @groupon = Groupon.find_by_token(params[:id])
+    @orders = @groupon.orders
+    @page_title = "團購：#{@groupon.store.name}"
+
+    # about the groupon's orders
+    @grouped_orders = @groupon.group_order_by_user_team
+
+    # groups all of order_items by product.title
+    @order_items = @orders.map do |order|
+      order.order_items.map do |order_item|
+        order_item
+      end
+    end
+    @order_items.flatten!
+    @order_items = @order_items.group_by { |order_item| order_item.product.title }
+
+    # calculate the order_items total price, and put in each other
+    @order_items.each do |product_title, order_item|
+      @order_items[product_title] = order_item.inject(0) { |sum, order_item| sum + order_item.quantity }
+    end
+  end
+
   private
 
   def groupon_params
@@ -46,5 +71,15 @@ class GrouponsController < ApplicationController
   def find_store
     @store = Store.find_by(id: params[:store_id])
   end
+
+  def groupon_host_required
+    @groupon = Groupon.find_by_token(params[:id])
+
+    if @groupon.hosts.include?(current_user)
+      flash[:warning] = "迷路了嗎？需要幫你叫警察嗎？"
+      redirect_to groupons_path
+    end
+  end
+
 
 end
