@@ -13,7 +13,9 @@
     <tr>
       <td>名稱</td>
       <td>單價</td>
-      <td>購買</td>
+      <% if !@my_order.is_paid? && !@groupon.times_up? %>
+        <td>購買</td>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +23,9 @@
       <tr>
         <td><%= product.title %></td>
         <td><%= product.price %></td>
-        <td><%= link_to "訂購", add_to_order_groupon_product_path(@groupon.token, product), method: :post, class: "btn btn-info", data: { confirm: "確認訂購 #{product.title} ?" } %></td>
+        <% if !@my_order.is_paid? && !@groupon.times_up? %>
+          <td><%= link_to "訂購", add_to_order_groupon_product_path(@groupon.token, product), method: :post, class: "btn btn-info", data: { confirm: "確認訂購 #{product.title} ?" } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
