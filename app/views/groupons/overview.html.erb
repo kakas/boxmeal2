@@ -22,15 +22,17 @@
         <th>是否付款</th>
       </tr>
     </thead>
+
     <tbody>
-      <% @grouped_orders.each do |group_name, orders| %>
+      <% @grouped_orders.each do |team, team_orders| %>
         <% nobody_pay = true %>
         <tr class="info">
           <td colspan="4">
-            <%= group_name %>
+            <%= team %>
           </td>
         </tr>
-        <% orders.each do |order| %>
+
+        <% team_orders.each do |order| %>
           <tr>
             <td><%= order.user.name %></td>
             <td>
@@ -46,9 +48,9 @@
                 付款、退款按鈕
                 <%# <%= link_to "退款", return_money_order_path(order.token), method: :post, class: "btn btn-warning btn-xs" %> %>
                 <%# <% nobody_pay = false %> %>
-              <%# <% else %> %>
-                <%# <%= link_to "設定為已付款", pay_money_order_path(order.token), method: :post, class: "btn btn-info btn-xs" %> %>
-              <% end %>
+                <%# <% else %> %>
+                  <%# <%= link_to "設定為已付款", pay_money_order_path(order.token), method: :post, class: "btn btn-info btn-xs" %> %>
+                <% end %>
             </td>
           </tr>
         <% end %>
@@ -56,13 +58,13 @@
           <td colspan="2">
           </td>
           <td>
-            <%= group_name %>
-            總價為： <%= orders.inject(0) { |sum, order| sum + order.price } %>
+            <%= team %>
+            總價為： <%= team_orders.inject(0) { |sum, order| sum + order.price } %>
         </td>
         <td>
           <% if nobody_pay %>
             整組付款按鈕
-            <%# <%= link_to "整組付款 <<", pay_money_by_group_orders_path(group_name: group_name, groupon_token: @groupon.token), method: :post, class: "btn btn-primary btn-xs" %> %>
+            <%# <%= link_to "整組付款 <<", pay_money_by_group_orders_path(team: team, groupon_token: @groupon.token), method: :post, class: "btn btn-primary btn-xs" %> %>
           <% end %>
         </td>
         </tr>
