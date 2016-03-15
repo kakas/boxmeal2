@@ -7,6 +7,13 @@ Rails.application.routes.draw do
   # 管理者
   namespace :admin do
     resources :stores
+    resources :users do
+      member do
+        post :to_admin
+        post :to_normal
+      end
+    end
+
   end
 
   # 一般使用者
