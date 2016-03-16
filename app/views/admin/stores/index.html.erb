@@ -12,7 +12,7 @@
   <tbody>
     <% @stores.each do |store| %>
       <tr>
-      
+
         <td><%= link_to(store.name, admin_store_path(store)) %></td>
         <td><%= store.phone %></td>
         <td><%= store.address %></td>

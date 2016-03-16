@@ -2,23 +2,21 @@
   <div class="group">
     <%= link_to("Edit", edit_admin_store_path(@store), class: "btn btn-primary pull-right")%>
   </div>
+
   <h2><%= @store.name %></h2>
-  
-	
+
   <% if @store.products.present? %>
-
-
     <table class="table table-striped">
       <% @store.products.each do |product| %>
-	    <tr>
-		  <td><%= product.id %></td>
-	      <td><%= product.title %></td>
-	      <td><%= product.price %></td>
-	    </tr>
-	  <% end %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= product.title %></td>
+          <td><%= product.price %></td>
+        </tr>
+      <% end %>
     </table>
   <% else %>
-  	<br />
+    <br />
     <h4>目前沒有任何商品</h4>
   <% end %>
 </div>

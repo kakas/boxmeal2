@@ -1,17 +1,13 @@
 <div class="nested-fields">
-	<div class="row">
-	<div class="form-group">
-		<div class="col-xs-3">
-			<%= f.input :title, input_html: { class: "form-control"} %>	
-		</div>
-		<div class="col-xs-3">
-			<%= f.input :price, input_html: { class: "form-inline"} %>
-		</div>
-		
-		<div class="col-xs-1"><%= link_to_remove_association "移除", f %>
-		</div>
-	</div>
-	</div>
-	
+  <div class="row">
+    <div class="form-group">
+      <div class="col-xs-3">
+        <%= f.input :title, input_html: { class: "form-control"} %>
+      </div>
+      <div class="col-xs-3">
+        <%= f.input :price, input_html: { class: "form-inline"} %>
+      </div>
+      <div class="col-xs-1"><%= link_to_remove_association "移除", f %> </div>
+    </div>
+  </div>
 </div>
-

@@ -1,30 +1,20 @@
 
 <%= simple_form_for store do |f| %>
   <div class="form-group">
-  	<%= f.input :name, input_html: { class: "form-control"} %>
-	<%= f.input :phone, input_html: { class: "form-control"} %>
-	<%= f.input :address, input_html: { class: "form-control"} %>
+    <%= f.input :name, input_html: { class: "form-control"} %>
+    <%= f.input :phone, input_html: { class: "form-control"} %>
+    <%= f.input :address, input_html: { class: "form-control"} %>
   </div>
 
   <div class="form-group">
     <%= f.simple_fields_for :products do |product| %>
       <div class="form-group">
-      	<%= render 'product_fields', :f => product %>	
+        <%= render 'product_fields', :f => product %>
       </div>
-      
+
     <% end %>
     <%= link_to_add_association '新增便當', f, :products %>
   </div>
-  
+
   <%= f.submit "Submit", class: "btn btn-primary", data: { disable_with: "Submitting..." } %>
 <% end %>
-
-
-
-
-
-
-
-
-
-
