@@ -1,13 +1,26 @@
 <div class="nested-fields">
   <div class="row">
+
     <div class="form-group">
-      <div class="col-xs-3">
-        <%= f.input :title, input_html: { class: "form-control"} %>
+
+      <div class="group col-md-8 col-md-offset-2">
+        <div class="input-group" style="padding-bottom:10px;">
+          <span class="input-group-addon"> 品名 </span>
+          <%= f.text_field :title, class: 'form-control' %>
+
+          <span class="input-group-addon"> 價格 </span>
+          <%= f.text_field :price, class: 'form-control' %>
+
+          <span class="input-group-btn">
+            <%= link_to_remove_association f, class: "btn btn-default" do %>
+              <i class="fa fa-long-arrow-right"></i>
+              <i class="fa fa-trash"></i>
+            <% end %>
+          </span>
+        </div>
       </div>
-      <div class="col-xs-3">
-        <%= f.input :price, input_html: { class: "form-inline"} %>
-      </div>
-      <div class="col-xs-1"><%= link_to_remove_association "移除", f, class: "btn btn-danger btn-xs" %> </div>
+
     </div>
+
   </div>
 </div>
