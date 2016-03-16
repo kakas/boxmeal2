@@ -7,13 +7,28 @@
 
   <% if @store.products.present? %>
     <table class="table table-striped">
-      <% @store.products.each do |product| %>
+      <thead>
         <tr>
-          <td><%= product.id %></td>
-          <td><%= product.title %></td>
-          <td><%= product.price %></td>
+          <td>品名</td>
+          <td>單價</td>
+          <td>other</td>
         </tr>
-      <% end %>
+      </thead>
+
+      <tbody>
+        <% @store.products.each do |product| %>
+          <tr>
+            <td><%= product.title %></td>
+            <td><%= product.price %></td>
+            <td>
+              <% product.opts.each do |opt| %>
+                <%= opt.content %> :
+                <%= opt.price %> 元
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
   <% else %>
     <br />
