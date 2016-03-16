@@ -39,7 +39,7 @@
             <td><%= order.user.name %></td>
             <td>
               <% order.order_items.each do |order_item| %>
-                <%= order_item.product.title %>
+                <%= order_item.product.title + " " + order_item.sugar + " " + order_item.ice %>
                 ( <%= order_item.quantity %> )
                 <br>
               <% end %>
