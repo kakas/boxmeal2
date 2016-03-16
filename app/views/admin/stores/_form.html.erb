@@ -28,7 +28,6 @@
 
   <hr>
 
-
   <div class="row">
     <%= link_to_add_association '新增品項', f, :products, class: "btn btn-info" %>
 
@@ -41,8 +40,18 @@
       </div>
     </div>
 
+    <br>
+    <br>
+
     <%= f.fields_for :products do |product| %>
       <%= render 'product_fields', :f => product %>
+      <div class="row">
+          <%= link_to_add_association '新增選項', product, :opts, class: "btn btn-info btn-xs pull-right" %>
+        <%= product.fields_for :opts do |opt| %>
+          <%= render 'opt_fields', :f => opt %>
+        <% end %>
+      </div>
+      <hr>
     <% end %>
   </div>
 
