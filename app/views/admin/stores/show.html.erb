@@ -2,23 +2,36 @@
   <div class="group">
     <%= link_to("Edit", edit_admin_store_path(@store), class: "btn btn-primary pull-right")%>
   </div>
+
   <h2><%= @store.name %></h2>
-  
-	
+
   <% if @store.products.present? %>
-
-
     <table class="table table-striped">
-      <% @store.products.each do |product| %>
-	    <tr>
-		  <td><%= product.id %></td>
-	      <td><%= product.title %></td>
-	      <td><%= product.price %></td>
-	    </tr>
-	  <% end %>
+      <thead>
+        <tr>
+          <td>品名</td>
+          <td>單價</td>
+          <td>other</td>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @store.products.each do |product| %>
+          <tr>
+            <td><%= product.title %></td>
+            <td><%= product.price %></td>
+            <td>
+              <% product.opts.each do |opt| %>
+                <%= opt.content %> :
+                <%= opt.price %> 元
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
   <% else %>
-  	<br />
+    <br />
     <h4>目前沒有任何商品</h4>
   <% end %>
 </div>

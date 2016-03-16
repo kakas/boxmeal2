@@ -22,6 +22,10 @@ class Order < ActiveRecord::Base
   def add_product_to_order(groupon, product)
     items << product
     order_items.last.update_columns(groupon_id: groupon)
+    if product.store.is_drink?
+      o = order_items.last
+      o.update_columns(sugar: "半糖", ice: "少冰")
+    end
     update_price
   end
 
