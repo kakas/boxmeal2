@@ -43,7 +43,7 @@ class Admin::StoresController < Admin::AdminController
   private
 
   def store_params
-    params.require(:store).permit(:name, :phone, :address,
+    params.require(:store).permit(:name, :phone, :address, :is_drink,
                                   products_attributes: [:id, :title, :price, :_destroy]
                                   )
   end

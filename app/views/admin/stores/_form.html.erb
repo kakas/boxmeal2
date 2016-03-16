@@ -1,25 +1,30 @@
 
 <%= form_for store do |f| %>
   <div class="row">
-    <div class="group col-md-4">
+    <div class="group col-md-3">
       <div class="input-group" style="padding-bottom:10px;">
         <span class="input-group-addon"> 店名 </span>
         <%= f.text_field :name, class: 'form-control' %>
       </div>
     </div>
 
-    <div class="group col-md-4">
+    <div class="group col-md-3">
       <div class="input-group" style="padding-bottom:10px;">
         <span class="input-group-addon"> 電話 </span>
         <%= f.text_field :phone, class: 'form-control' %>
       </div>
     </div>
 
-    <div class="group col-md-4">
+    <div class="group col-md-3">
       <div class="input-group" style="padding-bottom:10px;">
         <span class="input-group-addon"> 住址 </span>
         <%= f.text_field :address, class: 'form-control' %>
       </div>
+    </div>
+
+    <div class="group col-md-3">
+      <%= f.check_box :is_drink %>
+      <%= f.label "飲料店" %>
     </div>
 
     <%= f.submit "Submit", class: "btn btn-primary pull-right", data: { disable_with: "Submitting..." } %>
