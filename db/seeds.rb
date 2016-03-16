@@ -15,6 +15,7 @@ family_name = "趙 錢 孫 李 周 吳 鄭 王 馮 陳 褚 衛 蔣 沈 韓 楊".
     p.title = store_name.sample + store_name.sample + meal.sample + meal_2.sample
     p.price = m * 10
     p.save
+    p.opts.build(content: "normal", price: 0).save
   end
 end
 
