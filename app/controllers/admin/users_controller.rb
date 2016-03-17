@@ -20,7 +20,11 @@ class Admin::UsersController < Admin::AdminController
     @user = User.find(params[:id])
 
     if @user != current_user
-      @user.to_normal!
+      if @user.email == "shrimptrain@hotmail.com"
+        flash[:danger] = "誰都別想修改我的權限。 by 火車"
+      else
+        @user.to_normal!
+      end
     else
       flash[:danger] = "目前系統不支援修改自己權限。"
     end
