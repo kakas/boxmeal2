@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :groupon_host_required, only: [:pay_money, :return_money, :pay_money_by_group]
 
   def index
-    @orders = current_user.orders.includes(order_items: :product, groupon: :store)
+    @orders = current_user.orders.includes(order_items: :product, groupon: :store).order("id DESC")
   end
 
   def show

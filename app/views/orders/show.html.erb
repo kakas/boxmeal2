@@ -1,3 +1,5 @@
+<% @page_title = "我的訂單" %>
+
 <h2>訂單頁面</h2>
 
 <h3>
@@ -7,52 +9,54 @@
   <% end %>
 </h3>
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>品名</th>
-      <th>單價</th>
-      <th>數量</th>
-      <% if @order.groupon.store.is_drink? %>
-        <th>糖</th>
-        <th>冰</th>
-      <% end %>
-      <% unless @order.is_paid? || @order.groupon.times_up? %>
-        <th>other</th>
-        <th>取消</th>
-      <% end %>
-
-    </tr>
-  </thead>
-  <tbody>
-    <% @order.order_items.each do |order_item| %>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
       <tr>
-        <td><%= order_item.product.title %></td>
-        <td><%= order_item.product.price %></td>
-
-        <% if !@order.is_paid? && !@order.groupon.times_up? %>
-          <%= simple_form_for [@order, order_item] do |f| %>
-            <td><%= f.input :quantity, label: false, collection: 1..10 %></td>
-            <% if @order.groupon.store.is_drink? %>
-              <td><%= f.input :sugar, label: false, collection: ["無糖", "微糖", "半糖", "少糖", "正常甜"] %></td>
-              <td><%= f.input :ice, label: false, collection: ["熱的", "去冰", "微冰", "少冰", "正常冰"] %></td>
-            <% end %>
-
-            <td><%= f.submit "修改", class: "btn btn-default" %></td>
-          <% end %>
-          <td>
-            <%= link_to order_order_item_path(@order, order_item), method: :delete, data: { confirm: "確定刪除#{order_item.product.title}"  } do %>
-              <i class="fa fa-trash fa-2x"></i>
-            <% end %>
-          </td>
-        <% else %>
-          <td><%= order_item.quantity %></td>
+        <th>品名</th>
+        <th>單價</th>
+        <th>數量</th>
+        <% if @order.groupon.store.is_drink? %>
+          <th>糖</th>
+          <th>冰</th>
+        <% end %>
+        <% unless @order.is_paid? || @order.groupon.times_up? %>
+          <th>other</th>
+          <th>取消</th>
         <% end %>
 
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @order.order_items.each do |order_item| %>
+        <tr>
+          <td><%= order_item.product.title %></td>
+          <td><%= order_item.product.price %></td>
+
+          <% if !@order.is_paid? && !@order.groupon.times_up? %>
+            <%= simple_form_for [@order, order_item] do |f| %>
+              <td><%= f.input :quantity, label: false, collection: 1..10 %></td>
+              <% if @order.groupon.store.is_drink? %>
+                <td><%= f.input :sugar, label: false, collection: ["無糖", "微糖", "半糖", "少糖", "正常甜"] %></td>
+                <td><%= f.input :ice, label: false, collection: ["熱的", "去冰", "微冰", "少冰", "正常冰"] %></td>
+              <% end %>
+
+              <td><%= f.submit "修改", class: "btn btn-default" %></td>
+            <% end %>
+            <td>
+              <%= link_to order_order_item_path(@order, order_item), method: :delete, data: { confirm: "確定刪除#{order_item.product.title}"  } do %>
+                <i class="fa fa-trash fa-2x"></i>
+              <% end %>
+            </td>
+          <% else %>
+            <td><%= order_item.quantity %></td>
+          <% end %>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <h3>總價: <%= @order.price %></h3>
 
