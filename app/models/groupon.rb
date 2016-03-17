@@ -17,7 +17,19 @@ class Groupon < ActiveRecord::Base
   end
 
   def countdown
-    ((self.deadline - Time.zone.now)/60).round
+    time_count = self.deadline - Time.zone.now
+
+    case time_count
+    when 1..60
+    "#{(time_count).round} 秒"
+    when 61..3600
+    "#{((time_count)/60).round} 分鐘"
+    when 3601..86400
+    "#{((time_count)/3600).round} 小時"
+    else
+    "#{((time_count)/86400).round} 天"
+    end
+
   end
 
   def group_order_by_user_team

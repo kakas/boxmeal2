@@ -4,12 +4,12 @@
 
   <% if order.groupon.times_up? %>
     <% @panel_class = "panel panel-default" %>
-    <% @btn_class = "btn btn-danger" %>
+    <% @btn_class = "btn btn-danger btn-sm" %>
     <% @btn_text = ">> 已截止" %>
   <% else %>
     <% @panel_class = "panel panel-info" %>
-    <% @btn_class = "btn btn-info" %>
-    <% @btn_text = ">> 還有#{order.groupon.countdown}分鐘" %>
+    <% @btn_class = "btn btn-info btn-sm" %>
+    <% @btn_text = ">> 還有 " + order.groupon.countdown %>
   <% end %>
 
   <div class="col-md-8 col-md-offset-2">
@@ -19,7 +19,8 @@
           <%= link_to @btn_text, order_path(order.token), class: @btn_class %>
 
           <div class="pull-right">
-            <%= order.groupon.store.name %>, 團長：<%= order.groupon.hosts.first.name %>
+            <%= order.groupon.store.name %>
+            <div class="hidden-xs"> , 團長：<%= order.groupon.hosts.first.name %> </div>
           </div>
         </div>
 
