@@ -16,8 +16,10 @@
         <% @groupons.each do |groupon| %>
           <tr>
             <td>
-              <%= link_to groupon_products_path(groupon.token) do %>
-                <i class="fa fa-arrow-circle-right fa-3x"></i>
+              <% if current_user.present? %>
+                <%= link_to groupon_products_path(groupon.token) do %>
+                  <i class="fa fa-arrow-circle-right fa-3x"></i>
+                <% end %>
               <% end %>
             </td>
             <td><%= groupon.store.name %></td>
