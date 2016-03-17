@@ -47,5 +47,7 @@ Rails.application.routes.draw do
     resources :order_items
   end
 
+  resources :users, only: [:edit, :update]
+
 
 end

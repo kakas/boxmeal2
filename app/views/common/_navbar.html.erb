@@ -25,8 +25,11 @@
           <li><%= link_to "我想開團", stores_path %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              Hi,
-              <%= current_user.name %>
+              <% if current_user.name.blank? %>
+                無名
+              <% else %>
+                <%= current_user.name %>
+              <% end %>
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
@@ -34,7 +37,7 @@
                 <li><%= link_to "管理店家/產品", admin_stores_path %></li>
                 <li><%= link_to "管理使用者權限", admin_users_path %></li>
               <% end %>
-              <li><%= link_to "管理帳號", edit_user_registration_path(current_user) %></li>
+              <li><%= link_to "管理帳號", edit_user_path(current_user) %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "登出", destroy_user_session_path, method: :delete %></li>
             </ul>
