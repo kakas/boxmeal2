@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316090357) do
+ActiveRecord::Schema.define(version: 20160317031849) do
 
   create_table "groupon_hosts", force: :cascade do |t|
     t.integer  "user_id"
@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(version: 20160316090357) do
     t.string   "name"
     t.string   "team"
     t.boolean  "is_admin"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
