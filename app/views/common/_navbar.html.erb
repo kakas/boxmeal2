@@ -19,7 +19,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <% if !current_user %>
-          <li><%= link_to "登入", new_user_session_path %></li>
+          <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
         <% else %>
           <li><%= link_to "我的訂單列表", orders_path %></li>
           <li><%= link_to "我想開團", stores_path %></li>
