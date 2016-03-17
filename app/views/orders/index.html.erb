@@ -1,3 +1,5 @@
+<% @page_title = "我的訂單列表" %>
+
 <% @orders.each do |order| %>
 
   <% if order.groupon.times_up? %>
