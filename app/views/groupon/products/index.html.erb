@@ -1,11 +1,21 @@
 <% @page_title = "團購商品列表" %>
 
-<h2>現在開始訂購 <%= @groupon.store.name %> </h2>
+<h3>
+<% if @groupon.times_up? %>
+  <span class="label label-danger pull-right"> 團購已截止</span>
+<% else %>
+  <span class="label label-success pull-right"> 團購進行中</span>
+<% end %>
+</h3>
+
+<h3>現在開始訂購 <%= @groupon.store.name %> </h3>
+
 <h4> 截止時間為...
   <% if @groupon.hosts.include?(current_user) %>
     <%= link_to "修改", edit_groupon_path(@groupon.token), class: "btn btn-warning btn-xs" %>
   <% end %>
   <%= time_format(@groupon.deadline) %>
+
 </h4>
 
 <h4>
