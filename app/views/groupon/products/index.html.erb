@@ -18,11 +18,7 @@
 
 </h4>
 
-<h4>
-  <% if @groupon.hosts.include?(current_user) %>
-    <%= link_to "團購訂單列表", overview_groupon_path(@groupon.token) %>
-  <% end %>
-</h4>
+<h4> <%= link_to "團購訂單列表", overview_groupon_path(@groupon.token) %> </h4>
 
 <% if @my_order.present? %>
   <h3>

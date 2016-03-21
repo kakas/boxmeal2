@@ -10,7 +10,10 @@
 
 <h4> <%= link_to "回到訂購列表", groupon_products_path(@groupon.token) %> </h4>
 
-<%= link_to "取消團購 X", groupon_path(@groupon.token), method: :delete, class: "btn btn-default btn-xs pull-right", data: { confirm: "確定取消團購？" } %>
+<% if @groupon.hosts.include?(current_user) %>
+  <%= link_to "取消團購 X", groupon_path(@groupon.token), method: :delete, class: "btn btn-default btn-xs pull-right", data: { confirm: "確定取消團購？" } %>
+<% end %>
+
 
 
 <div class="panel panel-primary">
@@ -48,12 +51,8 @@
               </td>
               <td><%= order.price %></td>
               <td>
-                <% if order.is_paid? %>
-                  <%= link_to "退款", return_money_groupon_order_path(@groupon.token, order.token), method: :post, class: "btn btn-warning btn-xs" %>
-                  <% nobody_pay = false %>
-                <% else %>
-                  <%= link_to "設定為已付款", pay_money_groupon_order_path(@groupon.token, order.token), method: :post, class: "btn btn-info btn-xs" %>
-                <% end %>
+                <% nobody_pay = false if order.is_paid? %>
+                <%= render_pay_money_button(@groupon, order) %>
               </td>
             </tr>
           <% end %>
@@ -61,14 +60,13 @@
             <td colspan="2">
             </td>
             <td>
-              <%= team %>
-              總價為： <%= team_orders.inject(0) { |sum, order| sum + order.price } %>
-          </td>
-          <td>
-            <% if nobody_pay %>
-              <%= link_to "整組付款 <<", pay_money_by_team_groupon_orders_path(@groupon.token, team: team), method: :post, class: "btn btn-primary btn-xs" %>
-            <% end %>
-          </td>
+              <%= team %> 總價為： <%= team_orders.inject(0) { |sum, order| sum + order.price } %>
+            </td>
+            <td>
+              <% if nobody_pay && @groupon.hosts.include?(current_user) %>
+                <%= link_to "整組付款 <<", pay_money_by_team_groupon_orders_path(@groupon.token, team: team), method: :post, class: "btn btn-primary btn-xs" %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
         <tr class="danger">

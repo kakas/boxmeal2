@@ -1,7 +1,6 @@
 class GrouponsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index]
-  before_action :groupon_host_required, only: [:overview]
 
   before_action :find_store, only: [:new, :create, :show]
 
