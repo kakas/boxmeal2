@@ -40,21 +40,23 @@
           </tr>
 
           <% team_orders.each do |order| %>
-            <tr>
-              <td><%= order.user.name %></td>
-              <td>
-                <% order.order_items.each do |order_item| %>
-                  <%= order_item.product.title + " " + order_item.sugar + " " + order_item.ice %>
-                  ( <%= order_item.quantity %> )
-                  <br>
-                <% end %>
-              </td>
-              <td><%= order.price %></td>
-              <td>
-                <% nobody_pay = false if order.is_paid? %>
-                <%= render_pay_money_button(@groupon, order) %>
-              </td>
-            </tr>
+            <% if order.price > 0 %>
+              <tr>
+                <td><%= order.user.name %></td>
+                <td>
+                  <% order.order_items.each do |order_item| %>
+                    <%= order_item.product.title + " " + order_item.sugar + " " + order_item.ice %>
+                    ( <%= order_item.quantity %> )
+                    <br>
+                  <% end %>
+                </td>
+                <td><%= order.price %></td>
+                <td>
+                  <% nobody_pay = false if order.is_paid? %>
+                  <%= render_pay_money_button(@groupon, order) %>
+                </td>
+              </tr>
+            <% end %>
           <% end %>
           <tr>
             <td colspan="2">
