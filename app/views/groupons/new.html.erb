@@ -1,0 +1,10 @@
+<% @page_title = "新增團購" %>
+
+<h2>新增團購</h2>
+<h3><%= @store.name %></h3>
+
+<%= simple_form_for [@store, @groupon] do |f| %>
+  <%= f.input :deadline %>
+  <%= f.input :is_secret, label: "不公開", as: :boolean %>
+  <%= f.submit "Submit", data: { disable_with: "Submitting..." } %>
+<% end %>

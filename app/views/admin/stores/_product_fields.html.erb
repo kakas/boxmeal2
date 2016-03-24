@@ -1,0 +1,26 @@
+<div class="nested-fields">
+  <div class="row">
+
+    <div class="form-group">
+
+      <div class="group col-md-6">
+        <div class="input-group" style="padding-bottom:2px;">
+          <span class="input-group-addon"> 品名 </span>
+          <%= f.text_field :title, class: 'form-control' %>
+
+          <span class="input-group-addon"> 價格 </span>
+          <%= f.text_field :price, class: 'form-control' %>
+
+          <span class="input-group-btn">
+            <%= link_to_remove_association f, class: "btn btn-default" do %>
+              <i class="fa fa-long-arrow-right"></i>
+              <i class="fa fa-trash"></i>
+            <% end %>
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<% @page_title = "修改團購設定" %>
+
+<h2>修改團購設定</h2>
+<h3><%= @groupon.store.name %></h3>
+
+<%= simple_form_for @groupon, url: groupon_path(@groupon.token) do |f| %>
+  <%= f.input :deadline %>
+  <%= f.input :is_secret, label: "不公開", as: :boolean %>
+  <%= f.submit "Submit", data: { disable_with: "Submitting..." } %>
+<% end %>

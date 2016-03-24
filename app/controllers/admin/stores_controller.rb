@@ -1,6 +1,6 @@
-class Admin::StoresController < ApplicationController
+class Admin::StoresController < Admin::AdminController
 
-  before_action :find_store, only: [:edit, :update, :destroy]
+  before_action :find_store, only: [:edit, :show, :update, :destroy]
 
   def index
     @stores = Store.all
@@ -18,6 +18,10 @@ class Admin::StoresController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+
   end
 
   def edit
@@ -39,11 +43,14 @@ class Admin::StoresController < ApplicationController
   private
 
   def store_params
-    params.require(:store).permit(:name, :phone, :address)
+    params.require(:store).permit(:name, :phone, :address, :is_drink,
+                                  products_attributes: [:id, :title, :price, :_destroy]
+                                  )
   end
 
+
   def find_store
-    @store = Store.find(params[:id])
+    @store = Store.includes(products: :opts).find(params[:id])
   end
 
 end

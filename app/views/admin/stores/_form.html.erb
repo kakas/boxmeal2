@@ -1,6 +1,63 @@
-<%= simple_form_for store do |f| %>
-  <%= f.input :name %>
-  <%= f.input :phone %>
-  <%= f.input :address %>
-  <%= f.submit "Submit", data: { disable_with: "Submitting..." } %>
+
+<%= form_for store do |f| %>
+  <div class="row">
+    <div class="group col-md-3">
+      <div class="input-group" style="padding-bottom:10px;">
+        <span class="input-group-addon"> 店名 </span>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="group col-md-3">
+      <div class="input-group" style="padding-bottom:10px;">
+        <span class="input-group-addon"> 電話 </span>
+        <%= f.text_field :phone, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="group col-md-3">
+      <div class="input-group" style="padding-bottom:10px;">
+        <span class="input-group-addon"> 住址 </span>
+        <%= f.text_field :address, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="group col-md-3">
+      <%= f.check_box :is_drink %>
+      <%= f.label "飲料店" %>
+    </div>
+
+    <%= f.submit "Submit", class: "btn btn-primary pull-right", data: { disable_with: "Submitting..." } %>
+  </div>
+
+
+  <hr>
+
+  <div class="row">
+    <%= link_to_add_association '新增品項', f, :products, class: "btn btn-info" %>
+
+    <br>
+    <br>
+
+    <div class="progress">
+      <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+        分隔島
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <%= f.fields_for :products do |product| %>
+      <%= render 'product_fields', :f => product %>
+      <div class="row">
+          <%= link_to_add_association '新增選項', product, :opts, class: "btn btn-info btn-xs pull-right" %>
+        <%= product.fields_for :opts do |opt| %>
+          <%= render 'opt_fields', :f => opt %>
+        <% end %>
+      </div>
+      <hr>
+    <% end %>
+  </div>
+
 <% end %>

@@ -1,0 +1,36 @@
+<% @page_title = "店家列表" %>
+
+<h2>店家列表</h2>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="col-md-1">功能</th>
+        <th class="col-md-1">Drink?</th>
+        <th class="col-md-3">店名</th>
+        <th class="col-md-2">電話</th>
+        <th class="col-md-6">住址</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% @stores.each do |store| %>
+        <tr>
+          <td>
+            <%= link_to "開團", new_store_groupon_path(store), class: "btn btn-warning btn-sm", data: { confirm: "您選擇了 #{store.name} 進行開團" } %>
+          </td>
+          <td>
+            <% if store.is_drink? %>
+              <i class="fa fa-coffee"></i>
+            <% end %>
+          </td>
+          <td><%= store.name %></td>
+          <td><%= store.phone %></td>
+          <td><%= store.address %></td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

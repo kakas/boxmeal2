@@ -1,0 +1,55 @@
+<% @page_title = "團購商品列表" %>
+
+<h3>
+<% if @groupon.times_up? %>
+  <span class="label label-danger pull-right"> 團購已截止</span>
+<% else %>
+  <span class="label label-success pull-right"> 團購進行中</span>
+<% end %>
+</h3>
+
+<h3>現在開始訂購 <%= @groupon.store.name %> </h3>
+
+<h4> 截止時間為...
+  <% if @groupon.hosts.include?(current_user) %>
+    <%= link_to "修改", edit_groupon_path(@groupon.token), class: "btn btn-warning btn-xs" %>
+  <% end %>
+  <%= time_format(@groupon.deadline) %>
+
+</h4>
+
+<h4> <%= link_to "團購訂單列表", overview_groupon_path(@groupon.token) %> </h4>
+
+<% if @my_order.present? %>
+  <h3>
+    <%= link_to order_path(@my_order.token) do %>
+      我的訂單
+      <i class="fa fa-arrow-circle-left"></i>
+    <% end %>
+  </h3>
+<% end %>
+
+<hr>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <td>名稱</td>
+      <td>單價</td>
+      <% if !@my_order.is_paid? && !@groupon.times_up? %>
+        <td>購買</td>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @groupon.store.products.each do |product| %>
+      <tr>
+        <td><%= product.title %></td>
+        <td><%= product.price %></td>
+        <% if !@my_order.is_paid? && !@groupon.times_up? %>
+          <td><%= link_to "訂購", add_to_order_groupon_product_path(@groupon.token, product), method: :post, class: "btn btn-info", data: { confirm: "確認訂購 #{product.title} ?" } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

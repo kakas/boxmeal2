@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -32,8 +33,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'awesome_rails_console'
 gem 'devise'
+gem 'omniauth-facebook'
+gem 'figaro'
 gem 'bootstrap-sass'
 gem 'simple_form'
+gem 'cocoon'
+gem 'font-awesome-sass'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -53,4 +58,9 @@ group :development, :test do
   gem 'bullet'
   gem 'rails-erd'
   gem 'pry-rails'
+end
+
+group :production do
+  gem "pg"
+  gem "rails_12factor"
 end

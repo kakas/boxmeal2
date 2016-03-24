@@ -1,0 +1,54 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">餓了渴了想團購</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav">
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <% if !current_user %>
+          <li>
+            <%= link_to user_omniauth_authorize_path(:facebook) do %>
+              <i class="fa fa-facebook-square fa-2x"></i>
+              登入
+            <% end %>
+          </li>
+        <% else %>
+          <li><%= link_to "我的訂單列表", orders_path %></li>
+          <li><%= link_to "我想開團", stores_path %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <% if current_user.name.blank? %>
+                無名
+              <% else %>
+                <%= current_user.name %>
+              <% end %>
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <% if current_user.is_admin? %>
+                <li><%= link_to "管理店家/產品", admin_stores_path %></li>
+                <li><%= link_to "管理使用者權限", admin_users_path %></li>
+              <% end %>
+              <li><%= link_to "管理帳號", edit_user_path(current_user) %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "登出", destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

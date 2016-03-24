@@ -1,0 +1,15 @@
+<% @page_title = "設定帳戶資訊" %>
+
+<h2> 設定帳戶資訊 </h2>
+<h3> 第一次登入請勿跳過此設定，跳過後果自行負責。</h3>
+
+<hr>
+
+
+<div class="col-md-6 col-md-offset-3">
+  <%= simple_form_for current_user do |f| %>
+    <%= f.input :name, label: "名稱（請改成容易理解的）" %>
+    <%= f.input :team, label: "組別", required: true, collection: ["三相UPS組", "單相UPS組", "軟體組", "PV組", "PQD組", "機構組", "其他"] %>
+    <%= f.submit "Update" %>
+  <% end %>
+</div>

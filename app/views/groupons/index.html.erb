@@ -1,0 +1,45 @@
+<% @page_title = "公開團購列表" %>
+
+<div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">公開團購列表</div>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>店名</th>
+            <th>團長</th>
+            <th class="hidden-xs">截止時間</th>
+            <th>是否截止</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @groupons.each do |groupon| %>
+            <tr>
+              <td>
+                <% if current_user.present? %>
+                  <%= link_to groupon_products_path(groupon.token) do %>
+                    <i class="fa fa-arrow-circle-right fa-2x"></i>
+                  <% end %>
+                <% end %>
+              </td>
+              <td><%= groupon.store.name %></td>
+              <td><%= groupon.hosts.first.name %></td>
+              <td class="hidden-xs"><%= time_format(groupon.deadline) %></td>
+              <td>
+                <% if groupon.times_up? %>
+                  <span class="label label-danger">已截止</span>
+                <% else %>
+                  <span class="label label-success">進行中</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
