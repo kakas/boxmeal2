@@ -16,14 +16,16 @@
         <th>品名</th>
         <th>單價</th>
         <th>購買數量</th>
-        <% if @order.groupon.store.is_drink? %>
-          <th>選擇糖份</th>
-          <th>選擇冰塊</th>
-        <% end %>
         <% unless @order.is_paid? || @order.groupon.times_up? %>
+          <% if @order.groupon.store.is_drink? %>
+            <th>選擇糖份</th>
+            <th>選擇冰塊</th>
+          <% end %>
+          <th>Appends</th>
           <th>other</th>
           <th>取消</th>
         <% end %>
+        <th>小計</th>
 
       </tr>
     </thead>
@@ -40,6 +42,9 @@
                 <td><%= f.input :sugar, label: false, collection: ["無糖", "一分糖", "微糖", "半糖", "少糖", "正常甜"] %></td>
                 <td><%= f.input :ice, label: false, collection: ["熱的", "去冰", "微冰", "少冰", "正常冰"] %></td>
               <% end %>
+              <td>
+                <%= f.association :opts, collection: @opts, label: false,  as: :check_boxes, label_method: lambda { |opt| "#{opt.content} +#{opt.price}元" } %>
+              </td>
 
               <td><%= f.submit "修改", class: "btn btn-default" %></td>
             <% end %>
@@ -51,6 +56,7 @@
           <% else %>
             <td><%= order_item.quantity %></td>
           <% end %>
+          <td><%= order_item.total_price %></td>
 
         </tr>
       <% end %>
