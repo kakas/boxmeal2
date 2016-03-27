@@ -1,60 +1,32 @@
 
-<%= form_for store do |f| %>
+<%= simple_form_for store do |f| %>
   <div class="row">
-    <div class="group col-md-3">
-      <div class="input-group" style="padding-bottom:10px;">
-        <span class="input-group-addon"> 店名 </span>
-        <%= f.text_field :name, class: 'form-control' %>
-      </div>
+    <div class="col-md-6 col-md-offset-3">
+      <%= f.input :name,     inline_label: "店名: " %>
+      <%= f.input :phone,    inline_label: "電話: " %>
+      <%= f.input :address,  inline_label: "住址: " %>
+      <%= f.input :is_drink, label: "飲料店" %>
     </div>
-
-    <div class="group col-md-3">
-      <div class="input-group" style="padding-bottom:10px;">
-        <span class="input-group-addon"> 電話 </span>
-        <%= f.text_field :phone, class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="group col-md-3">
-      <div class="input-group" style="padding-bottom:10px;">
-        <span class="input-group-addon"> 住址 </span>
-        <%= f.text_field :address, class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="group col-md-3">
-      <%= f.check_box :is_drink %>
-      <%= f.label "飲料店" %>
-    </div>
-
-    <%= f.submit "Submit", class: "btn btn-primary pull-right", data: { disable_with: "Submitting..." } %>
   </div>
 
   <%= render "divide" %>
 
   <div class="row">
-    <%= link_to_add_association '新增選項', f, :opts, class: "btn btn-info btn-xs pull-right" %>
-    <%= f.fields_for :opts do |opt| %>
+    <%= f.simple_fields_for :opts do |opt| %>
       <%= render 'opt_fields', :f => opt %>
     <% end %>
+    <%= link_to_add_association '新增選項', f, :opts, class: "btn btn-info pull-right" %>
   </div>
 
   <hr>
 
   <div class="row">
     <%= link_to_add_association '新增品項', f, :products, class: "btn btn-info" %>
-
-    <br>
-    <br>
-
     <%= render "divide" %>
-
-    <br>
-    <br>
-
-    <%= f.fields_for :products do |product| %>
+    <%= f.simple_fields_for :products do |product| %>
       <%= render 'product_fields', :f => product %>
     <% end %>
   </div>
 
+  <%= f.submit "Submit", class: "btn btn-primary pull-right", data: { disable_with: "Submitting..." } %>
 <% end %>
