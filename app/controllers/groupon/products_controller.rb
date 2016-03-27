@@ -12,12 +12,8 @@ class Groupon::ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     @my_order = my_order(@groupon, current_user)
-    if @my_order.items.include?(@product)
-      flash[:warning] = "#{@product.title} 已經下訂過囉～請直接修改數量即可。"
-    else
-      @my_order.add_product_to_order(@groupon, @product)
-      flash[:success] = "訂購 #{@product.title} 成功。"
-    end
+    @my_order.add_product_to_order(@groupon, @product)
+    flash[:success] = "訂購 #{@product.title} 成功。"
 
     redirect_to order_path(@my_order.token)
   end
