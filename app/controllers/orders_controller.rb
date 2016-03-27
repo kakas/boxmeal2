@@ -8,7 +8,8 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.includes(order_items: :product).find_by_token(params[:id])
+    @order = Order.includes(order_items: [:product, :opts]).find_by_token(params[:id])
+    @opts = @order.groupon.store.opts
   end
 
   def pay_money

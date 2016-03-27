@@ -41,7 +41,7 @@ class Groupon < ActiveRecord::Base
   end
 
   def group_order_items_by_title
-    group_order_items = order_items.includes(:product).group_by { |order_item| "#{order_item.product.title} #{order_item.sugar} #{order_item.ice}" }
+    group_order_items = order_items.includes(:product, :opts).group_by { |order_item| "#{order_item.product.title} #{order_item.sugar} #{order_item.ice} #{order_item.binding_opts_string}" }
 
     # calculate the order_items total price, and put in each other
     group_order_items.each do |product_title, order_item|
