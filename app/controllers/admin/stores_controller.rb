@@ -1,6 +1,6 @@
 class Admin::StoresController < Admin::AdminController
 
-  before_action :find_store, only: [:edit, :show, :update, :destroy]
+  before_action :find_store, only: [:edit, :edit_products, :show, :update, :destroy]
 
   def index
     @stores = Store.all
@@ -27,6 +27,9 @@ class Admin::StoresController < Admin::AdminController
   def edit
   end
 
+  def edit_products
+  end
+
   def update
     if @store.update(store_params)
       redirect_to admin_stores_path
@@ -43,9 +46,7 @@ class Admin::StoresController < Admin::AdminController
   private
 
   def store_params
-    params.require(:store).permit(:name, :phone, :address, :is_drink,
-                                  products_attributes: [:id, :title, :price, :_destroy]
-                                  )
+    params.require(:store).permit(:name, :phone, :address, :is_drink, products_attributes: [:id, :title, :price, :_destroy])
   end
 
 

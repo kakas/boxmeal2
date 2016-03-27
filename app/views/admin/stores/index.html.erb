@@ -18,6 +18,7 @@
         <td><%= store.address %></td>
         <td>
           <%= link_to "編輯店家", edit_admin_store_path(store), class: "btn btn-default btn-xs" %>
+          <%= link_to "編輯店家商品", edit_products_admin_store_path(store), class: "btn btn-default btn-xs" %>
         </td>
       </tr>
     <% end %>

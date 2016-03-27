@@ -1,0 +1,15 @@
+<% @page_title = "修改商店產品" %>
+
+<h2> 修改 <%= @store.name %> 產品 </h2>
+
+<%= simple_form_for [:admin, @store] do |f| %>
+
+  <div class="row">
+    <%= link_to_add_association '新增產品', f, :products, class: "btn btn-info" %>
+    <%= f.simple_fields_for :products do |product| %>
+      <%= render 'product_fields', :f => product %>
+    <% end %>
+  </div>
+
+  <%= f.submit "Submit", class: "btn btn-primary pull-right", data: { disable_with: "Submitting..." } %>
+<% end %>

@@ -18,15 +18,5 @@
     <%= link_to_add_association '新增選項', f, :opts, class: "btn btn-info pull-right" %>
   </div>
 
-  <hr>
-
-  <div class="row">
-    <%= link_to_add_association '新增品項', f, :products, class: "btn btn-info" %>
-    <%= render "divide" %>
-    <%= f.simple_fields_for :products do |product| %>
-      <%= render 'product_fields', :f => product %>
-    <% end %>
-  </div>
-
   <%= f.submit "Submit", class: "btn btn-primary pull-right", data: { disable_with: "Submitting..." } %>
 <% end %>
