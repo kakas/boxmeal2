@@ -1,15 +1,21 @@
 <% @page_title = "修改商店產品" %>
 
 <h2> 修改 <%= @store.name %> 產品 </h2>
+<h3> <%= link_to "修改#{@store.name}", edit_admin_store_path(@store) %> </h3>
 
 <%= simple_form_for [:admin, @store] do |f| %>
+  <%= f.submit "送出修改", class: "btn btn-primary pull-right", data: { disable_with: "Submitting..." } %>
 
   <div class="row">
-    <%= link_to_add_association '新增產品', f, :products, class: "btn btn-info" %>
+    <hr>
+    <%= link_to_add_association '新增產品', f, :products, class: "btn btn-info btn-sm" %>
+    <hr>
+  </div>
+
+  <div class="row">
     <%= f.simple_fields_for :products do |product| %>
       <%= render 'product_fields', :f => product %>
     <% end %>
   </div>
 
-  <%= f.submit "Submit", class: "btn btn-primary pull-right", data: { disable_with: "Submitting..." } %>
 <% end %>

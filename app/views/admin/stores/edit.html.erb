@@ -1,5 +1,6 @@
 <% @page_title = "修改商店" %>
 <h2>修改商店: <%= @store.name %> </h2>
+<h3> <%= link_to "修改商店商品", edit_products_admin_store_path(@store) %> </h3>
 
 <%= render "form", store: [:admin, @store] %>
 
