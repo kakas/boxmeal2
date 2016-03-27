@@ -6,17 +6,23 @@
       <%= f.input :phone,    inline_label: "電話: " %>
       <%= f.input :address,  inline_label: "住址: " %>
       <%= f.input :is_drink, label: "飲料店" %>
+      <br>
+      <%= f.submit "送出修改", class: "btn btn-primary", data: { disable_with: "Submitting..." } %>
     </div>
   </div>
 
   <%= render "divide" %>
 
   <div class="row">
+    <hr>
+    <%= link_to_add_association '新增選項', f, :opts, class: "btn btn-info btn-sm" %>
+    <hr>
+  </div>
+
+  <div class="row">
     <%= f.simple_fields_for :opts do |opt| %>
       <%= render 'opt_fields', :f => opt %>
     <% end %>
-    <%= link_to_add_association '新增選項', f, :opts, class: "btn btn-info pull-right" %>
   </div>
 
-  <%= f.submit "Submit", class: "btn btn-primary pull-right", data: { disable_with: "Submitting..." } %>
 <% end %>

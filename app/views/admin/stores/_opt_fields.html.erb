@@ -1,10 +1,7 @@
 <div class="nested-fields">
 
-  <div class="group col-md-3">
-    <%= f.input :content, label: "選項", place_holder: "珍珠、椰果、貢丸" %>
-    <%= f.input :price, label: "價錢" %>
-    <%= link_to_remove_association "取消", f, class: "btn btn-default" %>
-    <hr>
-  </div>
+  <%= f.input :content, label: "選項", placeholder: "珍珠、椰果、貢丸？" %>
+  <%= f.input :price, label: "價錢" %>
+  <%= link_to_remove_association "刪除", f, class: "btn btn-default btn-xs" %>
 
 </div>
