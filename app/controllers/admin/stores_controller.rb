@@ -32,7 +32,8 @@ class Admin::StoresController < Admin::AdminController
 
   def update
     if @store.update(store_params)
-      redirect_to admin_stores_path
+      flash[:success] = "修改成功。"
+      redirect_to :back
     else
       render :edit
     end
@@ -46,7 +47,7 @@ class Admin::StoresController < Admin::AdminController
   private
 
   def store_params
-    params.require(:store).permit(:name, :phone, :address, :is_drink, products_attributes: [:id, :title, :price, :_destroy], opts_attributes: [:id, :content, :price])
+    params.require(:store).permit(:name, :phone, :address, :is_drink, products_attributes: [:id, :title, :price, :_destroy], opts_attributes: [:id, :content, :price, :_destroy])
   end
 
 
