@@ -50,7 +50,7 @@ class Admin::StoresController < Admin::AdminController
 
 
   def find_store
-    @store = Store.includes(products: :opts).find(params[:id])
+    @store = Store.find(params[:id])
   end
 
 end
