@@ -16,7 +16,7 @@
         <th>品名</th>
         <th>單價</th>
         <th>購買數量</th>
-        <% unless @order.is_paid? || @order.groupon.times_up? %>
+        <% if order_editable?(@order) %>
           <% if @order.groupon.store.is_drink? %>
             <th>選擇糖份</th>
             <th>選擇冰塊</th>
@@ -26,16 +26,16 @@
           <th>取消</th>
         <% end %>
         <th>小計</th>
-
       </tr>
     </thead>
+
     <tbody>
       <% @order.order_items.each do |order_item| %>
         <tr>
           <td><%= order_item.product.title %></td>
           <td><%= order_item.product.price %></td>
 
-          <% if !@order.is_paid? && !@order.groupon.times_up? %>
+          <% if order_editable?(@order) %>
             <%= simple_form_for [@order, order_item] do |f| %>
               <td><%= f.input :quantity, label: false, collection: 1..10 %></td>
               <% if @order.groupon.store.is_drink? %>
