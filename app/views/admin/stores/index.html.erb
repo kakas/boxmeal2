@@ -14,13 +14,11 @@
   <tbody>
     <% @stores.each do |store| %>
       <tr>
-
-        <td><%= link_to(store.name, admin_store_path(store)) %></td>
+        <td><%= store.name %></td>
         <td><%= store.phone %></td>
         <td><%= store.address %></td>
         <td>
-          <%= link_to "Edit Store", edit_admin_store_path(store), class: "btn btn-default btn-xs" %>
-          <%= link_to "Delete Store", admin_store_path(store), method: :delete, class: "btn btn-default btn-xs", data: { confirm: "確定刪除#{store.name}" } %>
+          <%= link_to "編輯店家", edit_admin_store_path(store), class: "btn btn-default btn-xs" %>
         </td>
       </tr>
     <% end %>
