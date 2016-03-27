@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317031849) do
+ActiveRecord::Schema.define(version: 20160327032349) do
 
   create_table "groupon_hosts", force: :cascade do |t|
     t.integer  "user_id"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20160317031849) do
   end
 
   create_table "product_options", force: :cascade do |t|
-    t.integer  "product_id"
+    t.integer  "store_id"
     t.string   "content"
     t.integer  "price",      default: 0
     t.datetime "created_at",             null: false
