@@ -13,7 +13,6 @@
         <tr>
           <td>品名</td>
           <td>單價</td>
-          <td>other</td>
         </tr>
       </thead>
 
@@ -22,12 +21,6 @@
           <tr>
             <td><%= product.title %></td>
             <td><%= product.price %></td>
-            <td>
-              <% product.opts.each do |opt| %>
-                <%= opt.content %> :
-                <%= opt.price %> 元
-              <% end %>
-            </td>
           </tr>
         <% end %>
       </tbody>
