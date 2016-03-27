@@ -1,0 +1,19 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>品名</th>
+      <th>購買數量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @order.order_items.each do |order_item| %>
+      <tr>
+        <td><%= order_item.product.title %> <%= order_item.binding_opts_string %> </td>
+        <td><%= order_item.quantity %></td>
+        <td><%= order_item.total_price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

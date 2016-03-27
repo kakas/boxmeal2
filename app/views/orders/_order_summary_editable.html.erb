@@ -1,0 +1,41 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>品名</th>
+      <th>單價</th>
+      <th>購買數量</th>
+      <% if @order.groupon.store.is_drink? %>
+        <th>選擇糖份</th>
+        <th>選擇冰塊</th>
+      <% end %>
+      <th>Appends</th>
+      <th>修改</th>
+      <th>取消</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @order.order_items.each do |order_item| %>
+      <tr>
+        <td><%= order_item.product.title %></td>
+        <td><%= order_item.product.price %></td>
+
+        <!-- form start -->
+        <%= simple_form_for [@order, order_item] do |f| %>
+          <td><%= f.input :quantity, label: false, collection: 1..20 %></td>
+          <% if @order.groupon.store.is_drink? %>
+            <td><%= f.input :sugar, label: false, collection: ["無糖", "一分糖", "微糖", "半糖", "少糖", "正常甜"] %></td>
+            <td><%= f.input :ice, label: false, collection: ["熱的", "去冰", "微冰", "少冰", "正常冰"] %></td>
+          <% end %>
+          <td> <%= f.association :opts, collection: @opts, label: false, as: :check_boxes, label_method: lambda { |opt| "#{opt.content} +#{opt.price}元" } %> </td>
+          <td><%= f.submit "修改", class: "btn btn-primary" %></td>
+        <% end %>
+        <!-- form end -->
+
+        <td> <%= render_delete_order_path(@order, order_item) %> </td>
+        <td><%= order_item.total_price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
