@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
   # 管理者
   namespace :admin do
-    resources :stores
+    resources :stores do
+      get :edit_products, on: :member
+    end
     resources :users do
       member do
         post :to_admin

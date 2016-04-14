@@ -1,11 +1,11 @@
 <% @page_title = "團購商品列表" %>
 
 <h3>
-<% if @groupon.times_up? %>
-  <span class="label label-danger pull-right"> 團購已截止</span>
-<% else %>
-  <span class="label label-success pull-right"> 團購進行中</span>
-<% end %>
+  <% if @groupon.times_up? %>
+    <span class="label label-danger pull-right"> 團購已截止</span>
+  <% else %>
+    <span class="label label-success pull-right"> 團購進行中</span>
+  <% end %>
 </h3>
 
 <h3>現在開始訂購 <%= @groupon.store.name %> </h3>
@@ -36,7 +36,7 @@
     <tr>
       <td>名稱</td>
       <td>單價</td>
-      <% if !@my_order.is_paid? && !@groupon.times_up? %>
+      <% if order_editable?(@my_order) %>
         <td>購買</td>
       <% end %>
     </tr>
@@ -46,7 +46,7 @@
       <tr>
         <td><%= product.title %></td>
         <td><%= product.price %></td>
-        <% if !@my_order.is_paid? && !@groupon.times_up? %>
+        <% if order_editable?(@my_order) %>
           <td><%= link_to "訂購", add_to_order_groupon_product_path(@groupon.token, product), method: :post, class: "btn btn-info", data: { confirm: "確認訂購 #{product.title} ?" } %></td>
         <% end %>
       </tr>

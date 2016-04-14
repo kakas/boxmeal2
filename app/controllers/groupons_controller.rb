@@ -54,7 +54,6 @@ class GrouponsController < ApplicationController
     # about the groupon
     @groupon = Groupon.find_by_token(params[:id])
     @orders = @groupon.orders.includes(:order_items)
-    @page_title = "團購：#{@groupon.store.name}"
 
     # about the groupon's orders
     @grouped_orders = @groupon.group_order_by_user_team

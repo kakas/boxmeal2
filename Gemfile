@@ -39,6 +39,7 @@ gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'cocoon'
 gem 'font-awesome-sass'
+gem 'rollbar', '~> 2.8.3'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
